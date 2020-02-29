@@ -1,0 +1,636 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled5.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyOTDU3iQCJVtcwniQKXr7vt",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/19PA1A0536/python-basics/blob/master/lab-1\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wyndZpGnaw4K",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "import seaborn as se\n",
+        "import matplotlib.pyplot as plt\n"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ExOJM8HsfDoh",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 419
+        },
+        "outputId": "be37931f-93ad-4c2d-ddb7-79518a64616a"
+      },
+      "source": [
+        "a=pd.read_csv('iris.data')\n",
+        "a"
+      ],
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>sepallength</th>\n",
+              "      <th>sepalwidth</th>\n",
+              "      <th>petallength</th>\n",
+              "      <th>petalwidth</th>\n",
+              "      <th>spec</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>5.1</td>\n",
+              "      <td>3.5</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>4.9</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>4.7</td>\n",
+              "      <td>3.2</td>\n",
+              "      <td>1.3</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>4.6</td>\n",
+              "      <td>3.1</td>\n",
+              "      <td>1.5</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>5.0</td>\n",
+              "      <td>3.6</td>\n",
+              "      <td>1.4</td>\n",
+              "      <td>0.2</td>\n",
+              "      <td>Iris-setosa</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>145</th>\n",
+              "      <td>6.7</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.2</td>\n",
+              "      <td>2.3</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>146</th>\n",
+              "      <td>6.3</td>\n",
+              "      <td>2.5</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>1.9</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>147</th>\n",
+              "      <td>6.5</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.2</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>148</th>\n",
+              "      <td>6.2</td>\n",
+              "      <td>3.4</td>\n",
+              "      <td>5.4</td>\n",
+              "      <td>2.3</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>149</th>\n",
+              "      <td>5.9</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.1</td>\n",
+              "      <td>1.8</td>\n",
+              "      <td>Iris-virginica</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>150 rows × 5 columns</p>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "     sepallength  sepalwidth  petallength  petalwidth            spec\n",
+              "0            5.1         3.5          1.4         0.2     Iris-setosa\n",
+              "1            4.9         3.0          1.4         0.2     Iris-setosa\n",
+              "2            4.7         3.2          1.3         0.2     Iris-setosa\n",
+              "3            4.6         3.1          1.5         0.2     Iris-setosa\n",
+              "4            5.0         3.6          1.4         0.2     Iris-setosa\n",
+              "..           ...         ...          ...         ...             ...\n",
+              "145          6.7         3.0          5.2         2.3  Iris-virginica\n",
+              "146          6.3         2.5          5.0         1.9  Iris-virginica\n",
+              "147          6.5         3.0          5.2         2.0  Iris-virginica\n",
+              "148          6.2         3.4          5.4         2.3  Iris-virginica\n",
+              "149          5.9         3.0          5.1         1.8  Iris-virginica\n",
+              "\n",
+              "[150 rows x 5 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 20
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XdzsCkNRfo0P",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 265
+        },
+        "outputId": "7587bf4b-e4b2-4afb-98bc-ac9de1f440af"
+      },
+      "source": [
+        "x=a['sepallength']\n",
+        "y=a['petallength']\n",
+        "plt.scatter(x,y)\n",
+        "plt.show()\n",
+        "\n"
+      ],
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6MHp6dwfnAyv",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 51
+        },
+        "outputId": "512d8a38-36cf-4980-da92-624b816fbf33"
+      },
+      "source": [
+        "np.cov(x,y)"
+      ],
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[0.68569351, 1.27368233],\n",
+              "       [1.27368233, 3.11317942]])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 28
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TmufHo17oFZe",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 320
+        },
+        "outputId": "961086c4-2f82-4089-c6e6-72ad262be4dc"
+      },
+      "source": [
+        "plt.figure(figsize=(10,5))\n",
+        "b=a['petalwidth']\n",
+        "plt.hist(b,bins=53,color=\"green\")\n",
+        "plt.show()"
+      ],
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 720x360 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pzAwuMBLqnGs",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "f4785f7e-9661-446e-8b3a-fb8739f128ac"
+      },
+      "source": [
+        "lst=[]\n",
+        "ss=a.loc[a['spec']==\"Iris-virginica\"]\n",
+        "d=ss['sepallength'].mean()\n",
+        "lst.append(d)\n",
+        "aa=a.loc[a['spec']==\"Iris-setoea\"]\n",
+        "e=aa['sepallength'].mean()\n",
+        "lst.append(e)\n",
+        "ii=a.loc[a['spec']==\"Iris-versicolour\"]\n",
+        "f=ii['sepallength'].mean()\n",
+        "lst.append(f)\n",
+        "max(lst)\n"
+      ],
+      "execution_count": 59,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "6.587999999999998"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 59
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mv97s-TNtzk_",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 456
+        },
+        "outputId": "96257713-6a2a-4a6a-a6df-ed3dbc71acbc"
+      },
+      "source": [
+        "s=pd.read_csv(\"students_placement_data.csv\")\n",
+        "s\n"
+      ],
+      "execution_count": 44,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>Roll No</th>\n",
+              "      <th>Gender</th>\n",
+              "      <th>Section</th>\n",
+              "      <th>SSC Percentage</th>\n",
+              "      <th>inter_Diploma_percentage</th>\n",
+              "      <th>B.Tech_percentage</th>\n",
+              "      <th>Backlogs</th>\n",
+              "      <th>registered_for_ Placement_Training</th>\n",
+              "      <th>placement status</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1</td>\n",
+              "      <td>M</td>\n",
+              "      <td>A</td>\n",
+              "      <td>87.3</td>\n",
+              "      <td>65.30</td>\n",
+              "      <td>40.00</td>\n",
+              "      <td>18</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>2</td>\n",
+              "      <td>F</td>\n",
+              "      <td>A</td>\n",
+              "      <td>89.0</td>\n",
+              "      <td>92.40</td>\n",
+              "      <td>71.45</td>\n",
+              "      <td>0</td>\n",
+              "      <td>yes</td>\n",
+              "      <td>Placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>3</td>\n",
+              "      <td>F</td>\n",
+              "      <td>A</td>\n",
+              "      <td>67.0</td>\n",
+              "      <td>68.00</td>\n",
+              "      <td>45.26</td>\n",
+              "      <td>13</td>\n",
+              "      <td>yes</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>4</td>\n",
+              "      <td>M</td>\n",
+              "      <td>A</td>\n",
+              "      <td>71.0</td>\n",
+              "      <td>70.40</td>\n",
+              "      <td>36.47</td>\n",
+              "      <td>17</td>\n",
+              "      <td>yes</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>5</td>\n",
+              "      <td>M</td>\n",
+              "      <td>A</td>\n",
+              "      <td>67.0</td>\n",
+              "      <td>65.50</td>\n",
+              "      <td>42.52</td>\n",
+              "      <td>17</td>\n",
+              "      <td>yes</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>112</th>\n",
+              "      <td>113</td>\n",
+              "      <td>M</td>\n",
+              "      <td>B</td>\n",
+              "      <td>81.1</td>\n",
+              "      <td>78.60</td>\n",
+              "      <td>35.84</td>\n",
+              "      <td>16</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>113</th>\n",
+              "      <td>114</td>\n",
+              "      <td>M</td>\n",
+              "      <td>B</td>\n",
+              "      <td>81.3</td>\n",
+              "      <td>85.12</td>\n",
+              "      <td>68.50</td>\n",
+              "      <td>0</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>114</th>\n",
+              "      <td>115</td>\n",
+              "      <td>M</td>\n",
+              "      <td>B</td>\n",
+              "      <td>83.5</td>\n",
+              "      <td>89.90</td>\n",
+              "      <td>76.30</td>\n",
+              "      <td>0</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>115</th>\n",
+              "      <td>116</td>\n",
+              "      <td>M</td>\n",
+              "      <td>B</td>\n",
+              "      <td>85.5</td>\n",
+              "      <td>90.63</td>\n",
+              "      <td>74.50</td>\n",
+              "      <td>0</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>116</th>\n",
+              "      <td>117</td>\n",
+              "      <td>M</td>\n",
+              "      <td>B</td>\n",
+              "      <td>80.0</td>\n",
+              "      <td>83.33</td>\n",
+              "      <td>65.53</td>\n",
+              "      <td>0</td>\n",
+              "      <td>NO</td>\n",
+              "      <td>Not placed</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>117 rows × 9 columns</p>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "     Roll No Gender  ... registered_for_ Placement_Training  placement status\n",
+              "0          1      M  ...                                 NO        Not placed\n",
+              "1          2      F  ...                                yes            Placed\n",
+              "2          3      F  ...                                yes        Not placed\n",
+              "3          4      M  ...                                yes        Not placed\n",
+              "4          5      M  ...                                yes        Not placed\n",
+              "..       ...    ...  ...                                ...               ...\n",
+              "112      113      M  ...                                 NO        Not placed\n",
+              "113      114      M  ...                                 NO        Not placed\n",
+              "114      115      M  ...                                 NO        Not placed\n",
+              "115      116      M  ...                                 NO        Not placed\n",
+              "116      117      M  ...                                 NO        Not placed\n",
+              "\n",
+              "[117 rows x 9 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 44
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NXaihMPlvac7",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 595
+        },
+        "outputId": "0b855ac0-88be-4b9d-8d0c-80444315becd"
+      },
+      "source": [
+        "grouped=s.groupby([\"Gender\",\"Backlogs\",\"placement status\"]).size()\n",
+        "grouped\n",
+        "\n"
+      ],
+      "execution_count": 54,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Gender  Backlogs  placement status\n",
+              "F       0         Not placed          11\n",
+              "                  Placed              27\n",
+              "        1         Not placed           5\n",
+              "                  Placed               1\n",
+              "        3         Not placed           1\n",
+              "                  Placed               1\n",
+              "        4         Not placed           1\n",
+              "        6         Not placed           1\n",
+              "        13        Not placed           1\n",
+              "M       0         Not placed          13\n",
+              "                  Placed               8\n",
+              "        1         Not placed           4\n",
+              "                  Placed               1\n",
+              "        2         Not placed           5\n",
+              "                  Placed               1\n",
+              "        3         Not placed           2\n",
+              "        5         Not placed           3\n",
+              "        6         Not placed           2\n",
+              "        7         Not placed           3\n",
+              "        8         Not placed           2\n",
+              "        9         Not placed           4\n",
+              "        10        Not placed           4\n",
+              "        11        Not placed           1\n",
+              "        14        Not placed           2\n",
+              "        15        Not placed           1\n",
+              "        16        Not placed           2\n",
+              "        17        Not placed           3\n",
+              "        18        Not placed           1\n",
+              "        19        Not placed           1\n",
+              "        20        Not placed           2\n",
+              "        22        Not placed           2\n",
+              "        25        Not placed           1\n",
+              "dtype: int64"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 54
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fvudyGjXww7b",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
